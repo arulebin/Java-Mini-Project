@@ -10,15 +10,12 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
-
-import java.awt.Desktop;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
 public class Dashboard {
     private String phoneNumber;
+    private WebView webView;  // WebView to display pages
 
     public Dashboard(String phoneNumber) {
         this.phoneNumber = phoneNumber;  // Store the phone number
@@ -69,19 +66,17 @@ public class Dashboard {
         sidebar.setPrefWidth(250);
         sidebar.setPadding(new Insets(20, 10, 10, 10));
         sidebar.setSpacing(15);
-
         sidebar.getChildren().addAll(
-            createSidebarButton("Home", "https://www.sxcce.edu.in/mobile/studview.php?ph=" + phoneNumber),
-            createSidebarButton("Attendance Details", "https://www.sxcce.edu.in/mobile/absent.php?ph=" + phoneNumber),
-            createSidebarButton("Student Details", "https://www.sxcce.edu.in/mobile/studview.php?ph=" + phoneNumber),
-            createSidebarButton("Faculty Details", "https://www.sxcce.edu.in/mobile/discipline.php?ph=" + phoneNumber),
-            createSidebarButton("Discipline Details", "https://www.sxcce.edu.in/mobile/discipline.php?ph=" + phoneNumber),
-            createSidebarButton("Fees Balance", "https://www.sxcce.edu.in/mobile/fees.php?ph=" + phoneNumber),
-            createSidebarButton("College Events", "https://www.sxcce.edu.in/mobile/events.php?ph=" + phoneNumber),
-            createSidebarButton("Internal Marks", "https://www.sxcce.edu.in/mobile/imarks.php?ph=" + phoneNumber),
-            createSidebarButton("End Semester Marks", "https://www.sxcce.edu.in/mobile/emarks.php?ph=" + phoneNumber)
+            createSidebarButton("Home", "https://www.sxcce.edu.in/mobile/studview.php?ph="+phoneNumber),
+            createSidebarButton("Attendance Details", "https://www.sxcce.edu.in/mobile/absent.php?ph="+phoneNumber),
+            createSidebarButton("Student Details", "https://www.sxcce.edu.in/mobile/studview.php?ph="+phoneNumber),
+            createSidebarButton("Faculty Details", "https://www.sxcce.edu.in/mobile/discipline.php?ph="+phoneNumber),
+            createSidebarButton("Discipline Details", "https://www.sxcce.edu.in/mobile/discipline.php?ph="+phoneNumber),
+            createSidebarButton("Fees Balance", "https://www.sxcce.edu.in/mobile/fees.php?ph="+phoneNumber),
+            createSidebarButton("College Events", "https://www.sxcce.edu.in/mobile/events.php?ph="+phoneNumber),
+            createSidebarButton("Internal Marks", "https://www.sxcce.edu.in/mobile/imarks.php?ph="+phoneNumber),
+            createSidebarButton("End Semester Marks", "https://www.sxcce.edu.in/mobile/emarks.php?ph="+phoneNumber)
         );
-
         return sidebar;
     }
 
@@ -90,7 +85,7 @@ public class Dashboard {
         button.setMaxWidth(Double.MAX_VALUE);
         button.setStyle("-fx-background-color: #059cfa; -fx-text-fill: white;");
         button.setFont(new Font(20));
-        button.setOnAction(e -> openLink(url));  // Open link in default browser
+        button.setOnAction(e -> openLink(url));  // Open link in WebView
         return button;
     }
 
@@ -100,21 +95,19 @@ public class Dashboard {
         dashboard.setSpacing(20);
         dashboard.setStyle("-fx-background-color: #f8f8f8;");
 
-        Label imagePlaceholder = new Label("College Image");
-        imagePlaceholder.setFont(Font.font("Arial", 24));
-        imagePlaceholder.setTextFill(Color.GRAY);
-        imagePlaceholder.setAlignment(Pos.CENTER);
-        imagePlaceholder.setPrefHeight(250);
-
         Label announcementsLabel = new Label("College Announcements");
-        announcementsLabel.setFont(Font.font("Arial",20));
+        announcementsLabel.setFont(Font.font("Arial", 20));
         announcementsLabel.setTextFill(Color.DARKBLUE);
 
         Label announcementContent = new Label("Announcements will be displayed here...");
         announcementContent.setFont(Font.font("Arial", 14));
         announcementContent.setWrapText(true);
 
-        dashboard.getChildren().addAll(imagePlaceholder, announcementsLabel, announcementContent);
+        // Initialize WebView and add it to the dashboard
+        webView = new WebView();
+        webView.setPrefHeight(500);  // Set height to fit the layout
+
+        dashboard.getChildren().addAll(webView, announcementsLabel, announcementContent);
         return dashboard;
     }
 
@@ -133,12 +126,7 @@ public class Dashboard {
     }
 
     private void openLink(String url) {
-        if (Desktop.isDesktopSupported()) {
-            try {
-                Desktop.getDesktop().browse(new URI(url));
-            } catch (IOException | URISyntaxException e) {
-                e.printStackTrace();
-            }
-        }
+        WebEngine webEngine = webView.getEngine();
+        webEngine.load(url);  // Load the URL within the WebView
     }
 }
