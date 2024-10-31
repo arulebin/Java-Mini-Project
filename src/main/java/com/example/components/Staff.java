@@ -3,12 +3,12 @@ package com.example.components;
 import javafx.scene.image.ImageView;
 
 public class Staff {
-    private ImageView image;
-    private String name;
-    private String designation;
-    private String department;
-    private String email;
-    private String subject;
+    private final ImageView image;
+    private final String name;
+    private final String designation;
+    private final String department;
+    private final String email;
+    private final String subject;
 
     public Staff(ImageView image, String name, String designation, String department, String email, String subject) {
         this.image = image;
