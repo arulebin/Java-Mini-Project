@@ -12,7 +12,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.web.WebEngine;
@@ -31,7 +34,6 @@ public class Dashboard {
         // Main layout
         BorderPane root = new BorderPane();
 
-        // Top Menu Bar
         MenuBar menuBar = new MenuBar();
         Menu homeMenu = new Menu("Home");
         Menu innovationMenu = new Menu("Innovation & Startup");
@@ -122,6 +124,7 @@ public class Dashboard {
         return dashboardContent;
     }
 
+    @SuppressWarnings("unchecked")
     private void displayFacultyDetails() {
     TableView<Staff> table = new TableView<>();
     table.setPrefHeight(675);  // Set preferred height for the table
