@@ -120,11 +120,6 @@ private Menu createStyledMenu(String title) {
     logoView1.setFitHeight(100); // Adjust the height as needed
     logoView1.setPreserveRatio(true); // Keep the aspect ratio
     
-    // Ensure the logo image is aligned to the right
-    //HBox.setHgrow(logoView, Priority.ALWAYS);
-    //logoView.setSmooth(true); // Enable smooth rendering if needed
-    //logoView.setCache(true);
-
     // Add the empty label and logo to the header
     header.getChildren().addAll(emptyLabel, logoView2, logoView3,logoView4,logoView5,logoView6,logoView7,logoView1);
 
@@ -169,14 +164,14 @@ private Menu createStyledMenu(String title) {
     private VBox createDashboardContent() {
         dashboardContent = new VBox();
         dashboardContent.setPadding(new Insets(20));
-        dashboardContent.setSpacing(20);
+        dashboardContent.setSpacing(10);
         dashboardContent.setStyle("-fx-background-color: #f8f8f8;");
 
         Label announcementsLabel = new Label("College Announcements");
         announcementsLabel.setFont(Font.font("Arial", 20));
         announcementsLabel.setTextFill(Color.DARKBLUE);
 
-        Label announcementContent = new Label("Announcements will be displayed here...");
+        Label announcementContent = new Label("End Semester Practical Examination starts on 13/11/2024\nEnd Semester Theory Examination starts on 28/11/2024");
         announcementContent.setFont(Font.font("Arial", 14));
         announcementContent.setWrapText(true);
 

@@ -12,6 +12,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -33,10 +36,10 @@ public class App extends Application {
         grid.setAlignment(Pos.CENTER); 
 
         // Logo image
-        Image logo = new Image("file:src\\main\\java\\com\\example\\LOGO.png"); 
+        Image logo = new Image("file:src\\main\\java\\com\\example\\logoclg.png"); 
         ImageView logoView = new ImageView(logo);
-        logoView.setFitWidth(150); 
-        logoView.setFitHeight(150); 
+        logoView.setPreserveRatio(true); // Maintain aspect ratio
+        logoView.setFitHeight(150); // Set the height, but width will adjust to maintain aspect ratio
         GridPane.setConstraints(logoView, 0, 0, 2, 1);
         GridPane.setHalignment(logoView, HPos.CENTER);
         
@@ -98,9 +101,11 @@ public class App extends Application {
 
         // Add all nodes to the GridPane
         grid.getChildren().addAll(logoView, titleLabel, usernameLabel, phnoInput, passwordLabel, passwordInput, loginButton, messageLabel);
+        grid.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 
         // Wrap GridPane in a VBox to center the entire form
         VBox vbox = new VBox(grid);
+        vbox.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
         vbox.setAlignment(Pos.CENTER); 
         vbox.setPadding(new Insets(30, 30, 30, 30));
 
