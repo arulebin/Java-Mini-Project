@@ -23,8 +23,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("SXCCE Student Dashboard");
-
+        primaryStage.setTitle("Student Dashboard || SXCCE");
+        primaryStage.getIcons().add(new Image("file:src\\main\\java\\com\\example\\LOGO.png"));
+        
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(20, 20, 20, 20)); 
         grid.setVgap(20); 
@@ -38,7 +39,7 @@ public class App extends Application {
         logoView.setFitHeight(150); 
         GridPane.setConstraints(logoView, 0, 0, 2, 1);
         GridPane.setHalignment(logoView, HPos.CENTER);
-
+        
         // Title Label
         Label titleLabel = new Label("Welcome to Student Dashboard");
         titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 28)); 
@@ -70,6 +71,7 @@ public class App extends Application {
         // Login Button
         Button loginButton = new Button("Login");
         loginButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 18px;"); 
+        loginButton.setDefaultButton(true);
         loginButton.setMinWidth(120); 
         GridPane.setConstraints(loginButton, 1, 4);
         GridPane.setHalignment(loginButton, HPos.CENTER);

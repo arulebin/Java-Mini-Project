@@ -31,47 +31,110 @@ public class Dashboard {
     }
 
     public Scene getDashboardScene() {
-        // Main layout
-        BorderPane root = new BorderPane();
+    // Main layout
+    BorderPane root = new BorderPane();
 
-        MenuBar menuBar = new MenuBar();
-        Menu homeMenu = new Menu("Home");
-        Menu innovationMenu = new Menu("Innovation & Startup");
-        Menu iqacMenu = new Menu("IQAC");
-        Menu nirfMenu = new Menu("NIRF");
-        Menu skillMenu = new Menu("Skill Development Program");
-        Menu alumniMenu = new Menu("Alumni");
-        Menu grievanceMenu = new Menu("Grievance");
-        Menu contactMenu = new Menu("Contact Us");
-        menuBar.getMenus().addAll(homeMenu, innovationMenu, iqacMenu, nirfMenu, skillMenu, alumniMenu, grievanceMenu, contactMenu);
-        root.setTop(new VBox(menuBar, createHeader()));
+    MenuBar menuBar = new MenuBar();
+    menuBar.setStyle("-fx-background-color: #028ECF;"); // Set background color
 
-        root.setLeft(createSidebar());
-        dashboardContent = createDashboardContent();
-        root.setCenter(dashboardContent);
-        root.setBottom(createFooter());
+    // Method to create menu with custom label for white text
+    Menu homeMenu = createStyledMenu("Home");
+    Menu innovationMenu = createStyledMenu("Innovation & Startup");
+    Menu iqacMenu = createStyledMenu("IQAC");
+    Menu nirfMenu = createStyledMenu("NIRF");
+    Menu skillMenu = createStyledMenu("Skill Development Program");
+    Menu alumniMenu = createStyledMenu("Alumni");
+    Menu grievanceMenu = createStyledMenu("Grievance");
+    Menu contactMenu = createStyledMenu("Contact Us");
 
-        return new Scene(root, 1400, 800);
-    }
+    // Add all menus to the MenuBar
+    menuBar.getMenus().addAll(homeMenu, innovationMenu, iqacMenu, nirfMenu, skillMenu, alumniMenu, grievanceMenu, contactMenu);
+
+    // Add MenuBar and header to the top of the BorderPane
+    root.setTop(new VBox(menuBar, createHeader()));
+
+    // Add other components to BorderPane
+    root.setLeft(createSidebar());
+    dashboardContent = createDashboardContent();
+    root.setCenter(dashboardContent);
+    root.setBottom(createFooter());
+
+    return new Scene(root, 1400, 800);
+}
+
+// Helper method to create a Menu with a white text label
+private Menu createStyledMenu(String title) {
+    Label menuLabel = new Label(title);
+    menuLabel.setTextFill(Color.WHITE); // Set text color to white
+    Menu menu = new Menu();
+    menu.setGraphic(menuLabel); // Use the Label as the graphic for the menu
+    return menu;
+}
+
 
     private HBox createHeader() {
-        HBox header = new HBox();
-        header.setPadding(new Insets(20));
-        header.setSpacing(10);
-        header.setStyle("-fx-background-color: #059cfa;");
-        Label emptyLabel = new Label(" ");
-        Label logoPlaceholder = new Label("St. Xavier's Catholic College of Engineering");
-        logoPlaceholder.setFont(Font.font("Arial", 24));
-        logoPlaceholder.setTextFill(Color.WHITE);
-        HBox.setHgrow(logoPlaceholder, Priority.ALWAYS);
-        logoPlaceholder.setAlignment(Pos.CENTER_RIGHT);
-        header.getChildren().addAll(emptyLabel, logoPlaceholder);
-        return header;
-    }
+    HBox header = new HBox();
+    header.setPadding(new Insets(10));
+    header.setSpacing(10);
+    header.setStyle("-fx-background-color: white;");
+
+    // Empty label (or spacer)
+    Label emptyLabel = new Label(" ");
+
+    // Load the logo image
+    
+    
+    Image logoImage2 = new Image("file:src\\main\\java\\com\\example\\logoclg.png"); // Replace with the correct path
+    ImageView logoView2 = new ImageView(logoImage2);
+    logoView2.setFitHeight(100); // Set desired height
+    logoView2.setPreserveRatio(true);
+
+    // Load the third image (add more if needed)
+    Image logoImage3 = new Image("file:src\\main\\java\\com\\example\\nacc.png"); // Replace with the correct path
+    ImageView logoView3 = new ImageView(logoImage3);
+    logoView3.setFitHeight(100); // Set desired height
+    logoView3.setPreserveRatio(true);
+    
+    Image logoImage4 = new Image("file:src\\main\\java\\com\\example\\nba.png"); // Replace with the correct path
+    ImageView logoView4 = new ImageView(logoImage4);
+    logoView4.setFitHeight(100); // Set desired height
+    logoView4.setPreserveRatio(true);
+    
+    Image logoImage5 = new Image("file:src\\main\\java\\com\\example\\ugc.png"); // Replace with the correct path
+    ImageView logoView5 = new ImageView(logoImage5);
+    logoView5.setFitHeight(100); // Set desired height
+    logoView5.setPreserveRatio(true);
+    
+    Image logoImage6 = new Image("file:src\\main\\java\\com\\example\\aff.png"); // Replace with the correct path
+    ImageView logoView6 = new ImageView(logoImage6);
+    logoView6.setFitHeight(100); // Set desired height
+    logoView6.setPreserveRatio(true);
+    
+    Image logoImage7 = new Image("file:src\\main\\java\\com\\example\\ilr.png"); // Replace with the correct path
+    ImageView logoView7 = new ImageView(logoImage7);
+    logoView7.setFitHeight(100); // Set desired height
+    logoView7.setPreserveRatio(true);
+    
+    Image logoImage1 = new Image("file:src\\main\\java\\com\\example\\sfe.png"); // Path to your logo image
+    ImageView logoView1 = new ImageView(logoImage1);
+    logoView1.setFitHeight(100); // Adjust the height as needed
+    logoView1.setPreserveRatio(true); // Keep the aspect ratio
+    
+    // Ensure the logo image is aligned to the right
+    //HBox.setHgrow(logoView, Priority.ALWAYS);
+    //logoView.setSmooth(true); // Enable smooth rendering if needed
+    //logoView.setCache(true);
+
+    // Add the empty label and logo to the header
+    header.getChildren().addAll(emptyLabel, logoView2, logoView3,logoView4,logoView5,logoView6,logoView7,logoView1);
+
+    return header;
+}
+
 
     private VBox createSidebar() {
         VBox sidebar = new VBox();
-        sidebar.setStyle("-fx-background-color: #d5dee3;");
+        sidebar.setStyle("-fx-background-color: #F0F0F0;");
         sidebar.setPrefWidth(250);
         sidebar.setPadding(new Insets(20, 10, 10, 10));
         sidebar.setSpacing(15);
@@ -93,7 +156,7 @@ public class Dashboard {
     private Button createSidebarButton(String text, Runnable action) {
         Button button = new Button(text);
         button.setMaxWidth(Double.MAX_VALUE);
-        button.setStyle("-fx-background-color: #059cfa; -fx-text-fill: white;");
+        button.setStyle("-fx-background-color: #028ECF; -fx-text-fill: white;");
         button.setFont(new Font(20));
         button.setOnAction(e -> action.run());
         return button;
